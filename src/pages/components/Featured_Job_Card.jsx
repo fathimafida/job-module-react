@@ -2,13 +2,15 @@
 import { FaShoppingBag } from 'react-icons/fa';
 import { MdBusinessCenter } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
-// import logo from "../assets/stuverse.png"
+
+// import logo from "../assets/stuverse.png";
+
 
 const Featured_Job_Card = () => {
   return (
-    <div className="flex  flex-col border  rounded-2xl p-3 mb-3 sm:col-span-1  ">
+    <div className="flex  flex-col  border  rounded-2xl p-3 mb-3   ">
       <div className="flex gap-2 items-center mb-2 ">
-        {/* <img src={logo} alt="logo" className="h-16 w-16"></img> */}
+         {/* <img src={logo} alt='logo' className='w-10 h-10 rounded-full'/> */}
         <div className="flex flex-col ">
           <p className="text-xl   text-white ">MERN Full Stack developer</p>
           <p className="text-sm  text-slate-500 ">White Mastery</p>
