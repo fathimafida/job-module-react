@@ -1,5 +1,5 @@
 import { Input } from "@nextui-org/input";
-import logo from "../assets/stuverse.png";
+// import logo from "../assets/stuverse.png";
 import { Button } from "@nextui-org/button";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ const AuthPage = () => {
   
   return (
     <div className="flex flex-col items-center h-screen font-serif">
-      <img src={logo} alt="logo" className="h-40"></img>
+      {/* <img src={logo} alt="logo" className="h-40"></img> */}
       <h1 className="text-3xl  font-bold  text-white mb-20">
         Welcome to StuVerse!
       </h1>
