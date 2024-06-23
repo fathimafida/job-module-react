@@ -1,15 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import AuthPage from "./pages/auth/AuthPage";
-import JobHome from "./pages/home/JobHome";
+import AuthPage from "./views/auth/AuthPage";
+import JobHome from "./views/home/JobHome";
 
-import AddJobPostPage from "./pages/addJobPost/AddJobPostPage";
-import JobDetailPage from "./pages/detailPage/JobDetailPage";
-import EditJobPost from "./pages/editJobPost/EditJobPost";
+import AddJobPostPage from "./views/addJobPost/AddJobPostPage";
+import JobDetailPage from "./views/detailPage/JobDetailPage";
+import EditJobPost from "./views/editJobPost/EditJobPost";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <>
+      <Toaster/>
       <div className="bg-slate-900 min-h-screen flex flex-col">
         <Routes>
           <Route path="/" element={<AuthPage />} />
