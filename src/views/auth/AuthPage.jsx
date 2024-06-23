@@ -11,6 +11,11 @@ import { useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loginWithEmailAndPassword } from "../../redux/authSlice";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+
 
 const schema = yup
   .object({
@@ -20,7 +25,9 @@ const schema = yup
   .required();
 
 const AuthPage = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
   const {
     register,
     handleSubmit,
@@ -28,8 +35,16 @@ const AuthPage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => {
-    console.log("data", data);
+  const onSubmit = async(data) => {
+     try {
+     await  dispatch(loginWithEmailAndPassword(data)).unwrap();
+       toast.success("Login Successful");
+       navigate("/jobHome")
+     } catch (error) {
+       toast.error(error.toString());
+       
+      
+     }
   }
   
   useEffect(() => {
