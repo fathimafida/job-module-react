@@ -6,7 +6,7 @@ import { IoIosAdd } from "react-icons/io";
 import stuverseLogo from "../../assets/stuverse.png";
 import { MdSearch } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-// import Featured_Job_Card from "./components/Featured_Job_Card";
+import Featured_Job_Card from "./components/Featured_Job_Card";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useEffect } from "react";
 // import { getHomeData } from "../../redux/slices/jobHomeSlice";
@@ -59,9 +59,11 @@ const JobHome = () => {
         <p className="text-xl   text-white">Featured Jobs</p>
       </div>
 
+         <Featured_Job_Card/>
       {/* {homeDataState.getJobList.map((getPost) => (
         <Featured_Job_Card key={getPost.id} data={getPost} />
       ))} */}
+    
     </div>
   );
 };
