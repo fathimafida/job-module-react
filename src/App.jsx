@@ -11,14 +11,14 @@ import { Toaster } from "sonner";
 function App() {
   return (
     <>
-      <Toaster/>
+      <Toaster richColors />
       <div className="bg-slate-900 min-h-screen flex flex-col">
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/jobHome" element={<JobHome />} />
           <Route path="/addJobPage" element={<AddJobPostPage />} />
           <Route path="/detailPage" element={<JobDetailPage />} />
-          <Route path="/editJobPost" element={<EditJobPost/>} />
+          <Route path="/editJobPost" element={<EditJobPost />} />
         </Routes>
       </div>
     </>

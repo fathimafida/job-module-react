@@ -11,7 +11,7 @@ import { useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginWithEmailAndPassword } from "../../redux/authSlice";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,8 @@ const schema = yup
 const AuthPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const authState =useSelector((state) => state.auth)
+
   
   const {
     register,
@@ -108,13 +110,13 @@ const AuthPage = () => {
         <p>Forgot Password?</p>
       </div>
 
-      <Button type="submit" form="login-form"
+      <Button isLoading={authState.loading} type="submit" form="login-form"
         className="bg-blue-500 text-white rounded-xl text-xl font-bold w-full mb-2"
         // onClick={() => navigate("/jobHome")}
 
       >
         Login
-      </Button>
+      </Button >
       <div className="flex gap-2 justify-center">
         <p className="text-white text-sm ">{"Don't Have an account?"}</p>
         <p className=" text-blue-300  text-md ">Sign Up</p>

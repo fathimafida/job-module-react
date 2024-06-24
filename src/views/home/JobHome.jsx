@@ -6,10 +6,29 @@ import { IoIosAdd } from "react-icons/io";
 import stuverseLogo from "../../assets/stuverse.png";
 import { MdSearch } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Featured_Job_Card from "./components/Featured_Job_Card";
+// import Featured_Job_Card from "./components/Featured_Job_Card";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { getHomeData } from "../../redux/slices/jobHomeSlice";
 
 const JobHome = () => {
   const navigate = useNavigate();
+  // const dispatch = useDispatch()
+  // const homeDataState = useSelector((state) => state.jobHome)
+  // const accessToken = useSelector((state) => state.auth.user.token.access)
+
+  // useEffect(() => {
+  //   dispatch(getHomeData(accessToken))
+  // }, [])
+
+
+  // if(homeDataState.status === "loading"){
+  //   return <p className="text-white">Loading</p>
+  // }
+
+  // if(homeDataState.status === "failure"){
+  //   return <p className="text-white">Error</p>
+  // }
   return (
     <div className="flex-grow min-h-full bg-slate-900 flex-col  font-serif p-3">
       <div className="flex  justify-between items-center">
@@ -39,11 +58,10 @@ const JobHome = () => {
       <div className="flex flex-col gap-2 justify-start mb-3 ">
         <p className="text-xl   text-white">Featured Jobs</p>
       </div>
-      <Featured_Job_Card />
-      <Featured_Job_Card />
-      <Featured_Job_Card />
-      <Featured_Job_Card />
-      <Featured_Job_Card />
+
+      {/* {homeDataState.getJobList.map((getPost) => (
+        <Featured_Job_Card key={getPost.id} data={getPost} />
+      ))} */}
     </div>
   );
 };
