@@ -119,7 +119,9 @@ const AuthPage = () => {
       </Button >
       <div className="flex gap-2 justify-center">
         <p className="text-white text-sm ">{"Don't Have an account?"}</p>
-        <p className=" text-blue-300  text-md ">Sign Up</p>
+        <p className=" text-blue-300  text-md cursor-pointer " onClick={
+          ()=>navigate ("/signUp")
+        }>Sign Up</p>
       </div>
     </div>
   );

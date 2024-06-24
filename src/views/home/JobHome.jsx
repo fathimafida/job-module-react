@@ -7,6 +7,7 @@ import stuverseLogo from "../../assets/stuverse.png";
 import { MdSearch } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Featured_Job_Card from "./components/Featured_Job_Card";
+// import HomeSkeleton from "../../components/skeleton/HomeSkeleton";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useEffect } from "react";
 // import { getHomeData } from "../../redux/slices/jobHomeSlice";
@@ -58,7 +59,7 @@ const JobHome = () => {
       <div className="flex flex-col gap-2 justify-start mb-3 ">
         <p className="text-xl   text-white">Featured Jobs</p>
       </div>
-
+   {/* <HomeSkeleton/> */}
          <Featured_Job_Card/>
       {/* {homeDataState.getJobList.map((getPost) => (
         <Featured_Job_Card key={getPost.id} data={getPost} />
