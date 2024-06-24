@@ -1,10 +1,10 @@
-import { FaArrowLeft, FaShoppingBag, } from "react-icons/fa";
+import { FaArrowCircleRight, FaArrowLeft, FaShoppingBag, } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import whiteMastery from "../../assets/whiteMastery.jpeg";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-import { Button } from "@nextui-org/button";
+import { Button,} from "@nextui-org/button";
 import { useState } from "react";
 
 
@@ -123,6 +123,9 @@ const JobDetailPage = () => {
         to apply. We are excited to hear from you! To apply, please visit our
         website at [website address].
       </p>
+      <Button className="bg-blue-950">
+        <FaArrowCircleRight  className="text-white text-lg font-serif font-bold" /> Apply Now
+      </Button>
     </div>
   );
 }

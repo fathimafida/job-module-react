@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 const schema = yup
   .object({
     email: yup.string().email().required(),
-    password: yup.string().required(),
+    password: yup.string().min(4,"Password must be at least 3 characters").required(),
   })
   .required();
 

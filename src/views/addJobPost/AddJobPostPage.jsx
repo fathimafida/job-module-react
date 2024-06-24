@@ -175,7 +175,7 @@ const schema = yup
               </Dropdown>
             }
           />
-          <div className="flex justify-end text-white">0/50</div>
+         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             choose Job Location Type
@@ -216,7 +216,7 @@ const schema = yup
               </Dropdown>
             }
           />
-          <div className="flex justify-end text-white">0/50</div>
+         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Select Your Skills
@@ -233,7 +233,7 @@ const schema = yup
             isInvalid={errors.skills ? true : false}
             errorMessage={errors.skills?.message}
           />
-          <div className="flex justify-end text-white">0/50</div>
+        
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Job Description
@@ -266,7 +266,7 @@ const schema = yup
             className=" mb-4  text-sm text-white border-blue-300"
             inputStyle={{ color: "white" }}
             {...register("url")}
-            isInvalid={errors.url? true : false}
+            isInvalid={errors.url ? true : false}
             errorMessage={errors.url?.message}
           />
         </form>
@@ -274,8 +274,7 @@ const schema = yup
         <Button
           form="add-job"
           type="submit"
-          color="primary"
-          className="w-full text-white font-bold text-xl"
+          className="w-full text-white bg-blue-950 font-bold text-xl"
         >
           Post Job
         </Button>

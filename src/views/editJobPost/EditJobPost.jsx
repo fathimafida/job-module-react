@@ -13,6 +13,7 @@ const EditJobPost = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
+  // const [isOpen3, setIsOpen3] = useState(false);
   const navigate = useNavigate();
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -20,6 +21,10 @@ const EditJobPost = () => {
   const handleToggle2 = () => {
     setIsOpen2(!isOpen2);
   };
+
+  // const handleToggle3 = () => {
+  //   setIsOpen3(!isOpen3);
+  // };
 
     const schema = yup
       .object({
@@ -125,7 +130,7 @@ const EditJobPost = () => {
             isInvalid={errors.place ? true : false}
             errorMessage={errors.place?.message}
           />
-          <div className="flex justify-end text-white">0/50</div>
+       
           {/*  */}
           <label className="text-white text-xl font-bold mb-2 block ">
             Choose Job Type
@@ -202,15 +207,18 @@ const EditJobPost = () => {
                   </Button>
                 </DropdownTrigger>
 
-                <DropdownMenu>
-                  <DropdownItem key="Remote">Remote</DropdownItem>
-                  <DropdownItem key="Hybrid">Hybrid</DropdownItem>
-                  <DropdownItem key="Onsite">Onsite</DropdownItem>
+                <DropdownMenu aria-label="Dropdown menu with shortcut">
+                  <DropdownItem key="fullTime">Full Time</DropdownItem>
+                  <DropdownItem key="partTime">Part Time</DropdownItem>
+                  <DropdownItem key="contract">Contract</DropdownItem>
+
+                  <DropdownItem key="internship">Internship</DropdownItem>
+                  <DropdownItem key="temporary">Temporary</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             }
           />
-          <div className="flex justify-end text-white">0/50</div>
+         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Select Your Skills
@@ -226,8 +234,19 @@ const EditJobPost = () => {
             {...register("skills")}
             isInvalid={errors.skills ? true : false}
             errorMessage={errors.skills?.message}
+            // endContent={
+
+            // <CheckboxGroup isDisabled label="Select Skills">
+            //   <Checkbox value="C">Buenos Aires</Checkbox>
+            //   <Checkbox value="Java">Sydney</Checkbox>
+            //   <Checkbox value="Python">San Francisco</Checkbox>
+            //   <Checkbox value="HTML">London</Checkbox>
+            //   <Checkbox value="CSS">Tokyo</Checkbox>
+            // </CheckboxGroup>
+
+            // }
           />
-          <div className="flex justify-end text-white">0/50</div>
+        
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Job Description
@@ -267,8 +286,7 @@ const EditJobPost = () => {
         <Button
           form="edit-job"
           type="submit"
-          color="primary"
-          className="w-full text-white font-bold text-xl"
+          className="w-full bg-blue-950 text-white font-bold text-xl"
         >
           Edit Post
         </Button>
