@@ -7,29 +7,30 @@ import stuverseLogo from "../../assets/stuverse.png";
 import { MdSearch } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Featured_Job_Card from "./components/Featured_Job_Card";
-// import HomeSkeleton from "../../components/skeleton/HomeSkeleton";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import { getHomeData } from "../../redux/slices/jobHomeSlice";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getHomeData } from "../../redux/slices/jobHomeSlice";
 
 const JobHome = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch()
-  // const homeDataState = useSelector((state) => state.jobHome)
-  // const accessToken = useSelector((state) => state.auth.user.token.access)
+  const dispatch = useDispatch()
+  const homeDataState = useSelector((state) => state.jobHome)
+  const accessToken = useSelector((state) => state.auth.user.token.access)
 
-  // useEffect(() => {
-  //   dispatch(getHomeData(accessToken))
-  // }, [])
+  useEffect(() => {
+    dispatch(getHomeData(accessToken))
+  }, [])
 
 
-  // if(homeDataState.status === "loading"){
-  //   return <p className="text-white">Loading</p>
-  // }
+  if(homeDataState.status === "loading"){
+    return <p className="text-white justify-center items-center">Loading</p>
+  }
 
-  // if(homeDataState.status === "failure"){
-  //   return <p className="text-white">Error</p>
-  // }
+  if (homeDataState.status === "failure") {
+    console.log(homeDataState.error)
+    return <p className="text-white">Error</p>
+  }
   return (
     <div className="flex-grow min-h-full bg-slate-900 flex-col  font-serif p-3">
       <div className="flex  justify-between items-center">
@@ -60,13 +61,13 @@ const JobHome = () => {
         <p className="text-xl   text-white">Featured Jobs</p>
       </div>
    {/* <HomeSkeleton/> */}
-         <Featured_Job_Card/>
-      {/* {homeDataState.getJobList.map((getPost) => (
-        <Featured_Job_Card key={getPost.id} data={getPost} />
-      ))} */}
+      {homeDataState.jobList && homeDataState.jobList.map((post) => (
+        <Featured_Job_Card key={post.id} jobPost={post} />
+      ))}
     
     </div>
   );
 };
+
 
 export default JobHome;

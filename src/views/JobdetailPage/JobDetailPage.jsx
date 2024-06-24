@@ -77,6 +77,7 @@ const JobDetailPage = () => {
       <hr className="border-slate-500 mb-3" />
       <h1 className="text-xl font-bold  text-white mb-2 ">Skills Required</h1>
       <div className="flex flex-wrap gap-2 mb-3">
+        
         {dummySkills.map((skill) => {
           return (
             <div

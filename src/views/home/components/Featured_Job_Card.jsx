@@ -3,10 +3,14 @@ import { FaArrowCircleRight,  FaShoppingBag } from 'react-icons/fa';
 import { MdBusinessCenter, } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import whiteMasteryLogo from '../../../assets/whiteMastery.jpeg'
 
 
-const Featured_Job_Card = () => {
+
+const Featured_Job_Card = (
+  
+   { jobPost
+  }
+) => {
   const navigate = useNavigate()
   return (
     <div
@@ -15,37 +19,42 @@ const Featured_Job_Card = () => {
     >
       <div className="flex gap-2 items-center mb-2 ">
         <img
-          src={whiteMasteryLogo}
+          src={jobPost.image}
           alt="logo"
-          className="h-12 w-12 rounded-full"
+          className="h-12 w-12 rounded-full mb-3"
         />
         <div className="flex flex-col ">
-          <p className="text-xl   text-white ">MERN Full Stack developer</p>
-          <p className="text-sm  text-slate-500 ">White Mastery</p>
+          <p className="text-xl   text-white ">{ jobPost.title}</p>
+          <p className="text-sm  text-slate-500 ">{jobPost.companyName}</p>
         </div>
       </div>
       <div className="flex gap-2 mb-2 ">
         <div className="flex gap-2 items-center bg-gray-800 border rounded-xl p-1">
           <FaShoppingBag className="text-white text-sm " />
-          <p className="text-sm    text-white">Temporary</p>
+          <p className="text-sm    text-white">{jobPost.jobType}</p>
         </div>
         <div className="flex gap-2 items-center border bg-gray-800 rounded-xl px-2">
           <MdBusinessCenter className="text-white text-sm " />
-          <p className="text-sm    text-white">On-site</p>
+          <p className="text-sm    text-white">{jobPost.jobLocationType}</p>
         </div>
       </div>
 
       <div className="flex gap-2 items-center mb-3  p-1">
         <FaLocationDot className="text-white text-sm " />
-        <p className="text-sm    text-slate-300">Chennai,Tamil Nadu,India</p>
+        <p className="text-sm    text-slate-300">{jobPost.place}</p>
       </div>
       <hr className="border-slate-500 mb-3" />
       <div className="flex  justify-between items-center p-1 ">
-        <p className="text-sm    text-slate-300">2 days ago</p>
+        <p className="text-sm    text-slate-300">{jobPost.createdAt}</p>
         <FaArrowCircleRight className="text-blue-300 text-md" />
       </div>
     </div>
   );
 }
 
+Featured_Job_Card.propTypes = {
+  jobPost: {
+    type: Object,
+ }
+}
 export default Featured_Job_Card

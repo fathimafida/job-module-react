@@ -1,39 +1,38 @@
 import { Input } from "@nextui-org/input";
- import logo from "../../assets/stuverse.png";
+import logo from "../../assets/stuverse.png";
 import { Button } from "@nextui-org/button";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 
-
-
-
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginWithEmailAndPassword } from "../../redux/authSlice";
+import { loginWithEmailAndPassword } from "../../redux/slices/authSlice";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-
 
 const schema = yup
   .object({
     email: yup.string().email().required(),
-    password: yup.string().min(4,"Password must be at least 3 characters").required(),
+    password: yup
+      .string()
+      .min(4, "Password must be at least 3 characters")
+      .required(),
   })
   .required();
 
 const AuthPage = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const authState =useSelector((state) => state.auth)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
 
-  const [showPassword, setShowPassword] = useState(false)
-  
+  const [showPassword, setShowPassword] = useState(false);
+
   const togglePassword = () => {
     setShowPassword(!showPassword);
-  }
+  };
   const {
     register,
     handleSubmit,
@@ -41,22 +40,19 @@ const AuthPage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = async(data) => {
-     try {
-     await  dispatch(loginWithEmailAndPassword(data)).unwrap();
-       toast.success("Login Successful");
-       navigate("/jobHome")
-     } catch (error) {
-       toast.error(error.toString());
-       
-      
-     }
-  }
-  
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(loginWithEmailAndPassword(data)).unwrap();
+      toast.success("Login Successful");
+      navigate("/jobHome");
+    } catch (error) {
+      toast.error(error.toString());
+    }
+  };
+
   useEffect(() => {
-    console.log("errors",errors);
-  }
-  , [errors])
+    console.log("errors", errors);
+  }, [errors]);
 
   return (
     <div className="flex flex-col items-center h-screen font-serif p-3">
@@ -100,7 +96,13 @@ const AuthPage = () => {
           placeholder="Enter your password"
           endContent={<FaEye onClick={togglePassword} />}
           endContentVisible={showPassword}
-          rightSection={showPassword ? <FaEyeSlash onClick={togglePassword}/> : <FaEye onClick={togglePassword}/>}
+          rightSection={
+            showPassword ? (
+              <FaEyeSlash onClick={togglePassword} />
+            ) : (
+              <FaEye onClick={togglePassword} />
+            )
+          }
           className="text-white text-xl "
           {...register("password")}
           isInvalid={errors.password ? true : false}

@@ -2,16 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosClient } from "../../api/axioxClient";
 
 const initialState = {
-  getJobList: [],
+  jobList: [],
   status: "idle",
-  isError: false,
-  isLoading: false,
+  
 };
 
 export const getHomeData = createAsyncThunk(
   "jobHome/getHomeData",
   async (token) => {
-    const response = await axiosClient.get("/job/home/", {
+    const response = await axiosClient.get("/job/posts", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -28,7 +27,7 @@ const jobHomeSlice = createSlice({
     });
     builder.addCase(getHomeData.fulfilled, (state, action) => {
       state.status = "success";
-      state.getHomedata = action.payload;
+      state.jobList = action.payload;
     });
     builder.addCase(getHomeData.rejected, (state) => {
       state.status = "failure";

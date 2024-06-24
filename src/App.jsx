@@ -8,8 +8,22 @@ import JobDetailPage from "./views/JobdetailPage/JobDetailPage";
 import EditJobPost from "./views/editJobPost/EditJobPost";
 import { Toaster } from "sonner";
 import SignUp from "./views/auth/SignUp";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loadUser } from "./redux/slices/authSlice";
 
 function App() {
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
+  if (authState.status === "idle") {
+    return <p className="text-white">Loading</p>;
+  }
+
   return (
     <>
       <Toaster richColors />
@@ -20,7 +34,7 @@ function App() {
           <Route path="/addJobPage" element={<AddJobPostPage />} />
           <Route path="/detailPage" element={<JobDetailPage />} />
           <Route path="/editJobPost" element={<EditJobPost />} />
-          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </>
