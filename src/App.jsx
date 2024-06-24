@@ -7,6 +7,7 @@ import AddJobPostPage from "./views/addJobPost/AddJobPostPage";
 import JobDetailPage from "./views/JobdetailPage/JobDetailPage";
 import EditJobPost from "./views/editJobPost/EditJobPost";
 import { Toaster } from "sonner";
+import SignUp from "./views/auth/SignUp";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/addJobPage" element={<AddJobPostPage />} />
           <Route path="/detailPage" element={<JobDetailPage />} />
           <Route path="/editJobPost" element={<EditJobPost />} />
-          <Route path="/signUp" element={<signUp />} />
+          <Route path="/signup" element={<SignUp/>} />
         </Routes>
       </div>
     </>

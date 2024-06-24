@@ -10,28 +10,32 @@ const Featured_Job_Card = () => {
   const navigate = useNavigate()
   return (
     <div
-      className="flex  flex-col  border bg-zinc-900/50  rounded-2xl p-3 mb-3   "
+      className="flex  flex-col  border bg-zinc-900/50  border-gray-700 rounded-2xl p-3 mb-3   "
       onClick={() => navigate("/detailPage")}
     >
       <div className="flex gap-2 items-center mb-2 ">
-    <img src={whiteMasteryLogo} alt='logo' className="h-10 w-10 rounded-full" />
+        <img
+          src={whiteMasteryLogo}
+          alt="logo"
+          className="h-12 w-12 rounded-full"
+        />
         <div className="flex flex-col ">
           <p className="text-xl   text-white ">MERN Full Stack developer</p>
           <p className="text-sm  text-slate-500 ">White Mastery</p>
         </div>
       </div>
-      <div className="flex gap-2 mb-2">
-        <div className="flex gap-2 items-center border rounded-xl p-1">
+      <div className="flex gap-2 mb-2 ">
+        <div className="flex gap-2 items-center bg-gray-800 border rounded-xl p-1">
           <FaShoppingBag className="text-white text-sm " />
           <p className="text-sm    text-white">Temporary</p>
         </div>
-        <div className="flex gap-2 items-center border rounded-xl px-2">
+        <div className="flex gap-2 items-center border bg-gray-800 rounded-xl px-2">
           <MdBusinessCenter className="text-white text-sm " />
           <p className="text-sm    text-white">On-site</p>
         </div>
       </div>
 
-      <div className="flex gap-2 items-center  p-1">
+      <div className="flex gap-2 items-center mb-3  p-1">
         <FaLocationDot className="text-white text-sm " />
         <p className="text-sm    text-slate-300">Chennai,Tamil Nadu,India</p>
       </div>

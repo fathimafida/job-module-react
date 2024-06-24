@@ -1,7 +1,7 @@
 import { Input } from "@nextui-org/input";
  import logo from "../../assets/stuverse.png";
 import { Button } from "@nextui-org/button";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ import { FaEye } from "react-icons/fa";
 import { useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginWithEmailAndPassword } from "../../redux/authSlice";
 import { toast } from "sonner";
@@ -29,7 +29,11 @@ const AuthPage = () => {
   const dispatch = useDispatch()
   const authState =useSelector((state) => state.auth)
 
+  const [showPassword, setShowPassword] = useState(false)
   
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  }
   const {
     register,
     handleSubmit,
@@ -55,14 +59,14 @@ const AuthPage = () => {
   , [errors])
 
   return (
-    <div className="flex flex-col items-center h-screen font-serif">
+    <div className="flex flex-col items-center h-screen font-serif p-3">
       <img src={logo} alt="logo" className="h-40"></img>
       <h1 className="text-3xl  font-bold  text-white mb-20">
         Welcome to StuVerse!
       </h1>
 
       <form
-        className="w-full p-4 flex flex-col gap-2 "
+        className="w-full  flex flex-col gap-2 "
         id="login-form"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -70,7 +74,6 @@ const AuthPage = () => {
           Email
           <span className="text-red-500">*</span>
         </label>
-
         <Input
           color="primary"
           size="lg"
@@ -80,48 +83,52 @@ const AuthPage = () => {
           placeholder="Enter your email"
           labelPlaceholder="Enter your email"
           className="mb-4 w-[100%]  text-white "
-          
           {...register("email")}
           isInvalid={errors.email ? true : false}
-          errorMessage= {errors.email?.message}
+          errorMessage={errors.email?.message}
         />
         <label className="text-white mb-2 block ">
           Password
           <span className="text-red-500">*</span>
         </label>
-
         <Input
           isRequired
           size="lg"
           color="primary"
-          type="password"
+          type={showPassword ? "text" : "password"}
           variant="bordered"
           placeholder="Enter your password"
-          endContent={<FaEye className="text-white text-xl " />}
-          className=" mb-2  text-sm text-white border-blue-300"
-       
+          endContent={<FaEye onClick={togglePassword} />}
+          endContentVisible={showPassword}
+          rightSection={showPassword ? <FaEyeSlash onClick={togglePassword}/> : <FaEye onClick={togglePassword}/>}
+          className="text-white text-xl "
           {...register("password")}
           isInvalid={errors.password ? true : false}
-          errorMessage= {errors.password?.message}
+          errorMessage={errors.password?.message}
         />
       </form>
 
-      <div className="flex justify-end text-blue-300 mb-5 w-full mr-4 cursor-pointer" >
+      <div className="flex justify-end text-blue-300 mb-5 w-full mr-4 cursor-pointer">
         <p>Forgot Password?</p>
       </div>
 
-      <Button isLoading={authState.loading} type="submit" form="login-form"
-        className="bg-blue-500 text-white rounded-xl text-xl font-bold w-full mb-2"
+      <Button
+        isLoading={authState.loading}
+        type="submit"
+        form="login-form"
+        className="bg-blue-500 text-white rounded-xl text-xl font-bold w-full p-3 mb-2"
         // onClick={() => navigate("/jobHome")}
-
       >
         Login
-      </Button >
-      <div className="flex gap-2 justify-center">
+      </Button>
+      <div className="flex gap-2 justify-center ">
         <p className="text-white text-sm ">{"Don't Have an account?"}</p>
-        <p className=" text-blue-300  text-md cursor-pointer " onClick={
-          ()=>navigate ("/signUp")
-        }>Sign Up</p>
+        <p
+          className=" text-blue-300  text-md cursor-pointer "
+          onClick={() => navigate("/signup")}
+        >
+          Sign Up
+        </p>
       </div>
     </div>
   );
