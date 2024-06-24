@@ -11,6 +11,9 @@ import Featured_Job_Card from "./components/Featured_Job_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getHomeData } from "../../redux/slices/jobHomeSlice";
+import { CiLogout } from "react-icons/ci";
+import { logOut } from "../../redux/slices/authSlice";
+// import { logOut } from "../../redux/slices/authSlice";
 
 const JobHome = () => {
   const navigate = useNavigate();
@@ -20,7 +23,7 @@ const JobHome = () => {
 
   useEffect(() => {
     dispatch(getHomeData(accessToken))
-  }, [])
+  }, [dispatch,accessToken])
 
 
   if(homeDataState.status === "loading"){
@@ -28,7 +31,7 @@ const JobHome = () => {
   }
 
   if (homeDataState.status === "failure") {
-    console.log(homeDataState.error)
+  
     return <p className="text-white">Error</p>
   }
   return (
@@ -37,6 +40,14 @@ const JobHome = () => {
         <div className="flex-1"></div>
         <img src={stuverseLogo} alt="logo" className="h-16 " />
         <div className="flex-1"></div>
+        <CiLogout className="text-white text-xl "
+          onClick={
+        ()  => {
+              navigate('/')
+              dispatch(logOut())
+            }}
+        
+        />
         <IoIosAdd
           className="text-white text-3xl "
           onClick={() => navigate("/addJobPage")}
@@ -60,11 +71,11 @@ const JobHome = () => {
       <div className="flex flex-col gap-2 justify-start mb-3 ">
         <p className="text-xl   text-white">Featured Jobs</p>
       </div>
-   {/* <HomeSkeleton/> */}
-      {homeDataState.jobList && homeDataState.jobList.map((post) => (
-        <Featured_Job_Card key={post.id} jobPost={post} />
-      ))}
-    
+      {/* <HomeSkeleton/> */}
+      {
+        homeDataState.jobList.map((post) => (
+          <Featured_Job_Card key={post.id} jobPost={post} />
+        ))}
     </div>
   );
 };

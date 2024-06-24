@@ -11,6 +11,8 @@ import SignUp from "./views/auth/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadUser } from "./redux/slices/authSlice";
+import ProtectedRoute from "./components/skeleton/ProtectedRoute";
+import UnProtectedRoute from "./components/UnProtectedRoute";
 
 function App() {
   const authState = useSelector((state) => state.auth);
@@ -29,8 +31,8 @@ function App() {
       <Toaster richColors />
       <div className="bg-slate-900 min-h-screen flex flex-col">
         <Routes>
-          <Route path="/" element={<AuthPage />} />
-          <Route path="/jobHome" element={<JobHome />} />
+          <Route path="/" element={<UnProtectedRoute element={<AuthPage/>} />} />
+          <Route path="/jobHome" element={<ProtectedRoute element={<JobHome/>}/>} />
           <Route path="/addJobPage" element={<AddJobPostPage />} />
           <Route path="/detailPage" element={<JobDetailPage />} />
           <Route path="/editJobPost" element={<EditJobPost />} />

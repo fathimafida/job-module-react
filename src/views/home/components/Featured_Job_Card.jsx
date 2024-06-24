@@ -51,9 +51,9 @@ const Featured_Job_Card = (
   );
 }
 
-// Featured_Job_Card.propTypes = {
-//   jobPost: {
+Featured_Job_Card.propTypes = {
+  jobPost: {
   
-//  }
-// }
+ }
+}
 export default Featured_Job_Card
