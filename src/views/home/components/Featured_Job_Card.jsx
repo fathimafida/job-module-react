@@ -22,18 +22,17 @@ const Featured_Job_Card = (
           src={jobPost.image}
           alt="logo"
           className="h-12 w-12 rounded-full mb-3"
-        />
-        <div className="flex flex-col ">
-          <p className="text-xl   text-white ">{ jobPost.title}</p>
+        />        <div className="flex flex-col justify-center">
+          <p className="text-lg   text-white ">{ jobPost.title}</p>
           <p className="text-sm  text-slate-500 ">{jobPost.companyName}</p>
         </div>
       </div>
       <div className="flex gap-2 mb-2 ">
-        <div className="flex gap-2 items-center bg-gray-800 border rounded-xl p-1">
+        <div className="flex gap-2 items-center bg-gray-800 border rounded-2xl py-1 px-2">
           <FaShoppingBag className="text-white text-sm " />
           <p className="text-sm    text-white">{jobPost.jobType}</p>
         </div>
-        <div className="flex gap-2 items-center border bg-gray-800 rounded-xl px-2">
+        <div className="flex gap-2 items-center border bg-gray-800 rounded-2xl px-2">
           <MdBusinessCenter className="text-white text-sm " />
           <p className="text-sm    text-white">{jobPost.jobLocationType}</p>
         </div>
@@ -52,9 +51,9 @@ const Featured_Job_Card = (
   );
 }
 
-Featured_Job_Card.propTypes = {
-  jobPost: {
-    type: Object,
- }
-}
+// Featured_Job_Card.propTypes = {
+//   jobPost: {
+  
+//  }
+// }
 export default Featured_Job_Card
