@@ -1,11 +1,10 @@
-import { Input } from '@nextui-org/input'
-import { Button, Checkbox } from '@nextui-org/react';
-import { FaArrowLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-
+import { Input } from "@nextui-org/input";
+import { Button, Checkbox } from "@nextui-org/react";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col  font-serif  p-3">
       <FaArrowLeft
@@ -67,6 +66,6 @@ const SignUp = () => {
       </Button>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;

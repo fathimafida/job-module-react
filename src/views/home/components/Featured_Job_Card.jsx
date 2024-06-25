@@ -1,29 +1,25 @@
+import { FaArrowCircleRight, FaShoppingBag } from "react-icons/fa";
+import { MdBusinessCenter } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
-import { FaArrowCircleRight,  FaShoppingBag } from 'react-icons/fa';
-import { MdBusinessCenter, } from 'react-icons/md';
-import { FaLocationDot } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
+ import propTypes  from 'prop-types'
 
-
-
-const Featured_Job_Card = (
-  
-   { jobPost
-  }
-) => {
-  const navigate = useNavigate()
+const Featured_Job_Card = ({ jobPost }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="flex  flex-col  border bg-zinc-900/50  border-gray-700 rounded-2xl p-3 mb-3   "
-      onClick={() => navigate("/detailPage")}
+      onClick={() => navigate(`/job/${jobPost.id}`)}
     >
       <div className="flex gap-2 items-center mb-2 ">
         <img
           src={jobPost.image}
           alt="logo"
           className="h-12 w-12 rounded-full mb-3"
-        />        <div className="flex flex-col justify-center">
-          <p className="text-lg   text-white ">{ jobPost.title}</p>
+        />{" "}
+        <div className="flex flex-col justify-center">
+          <p className="text-lg   text-white ">{jobPost.title}</p>
           <p className="text-sm  text-slate-500 ">{jobPost.companyName}</p>
         </div>
       </div>
@@ -49,11 +45,9 @@ const Featured_Job_Card = (
       </div>
     </div>
   );
-}
+};
 
 Featured_Job_Card.propTypes = {
-  jobPost: {
-  
- }
+  jobPost: propTypes.object(),
 }
-export default Featured_Job_Card
+export default Featured_Job_Card;

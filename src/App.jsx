@@ -34,7 +34,7 @@ function App() {
           <Route path="/" element={<UnProtectedRoute element={<AuthPage/>} />} />
           <Route path="/jobHome" element={<ProtectedRoute element={<JobHome/>}/>} />
           <Route path="/addJobPage" element={<AddJobPostPage />} />
-          <Route path="/detailPage" element={<JobDetailPage />} />
+           <Route path="/job/:id" element={<ProtectedRoute element={<JobDetailPage />} />} />
           <Route path="/editJobPost" element={<EditJobPost />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

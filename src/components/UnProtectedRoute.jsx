@@ -7,7 +7,7 @@ const UnProtectedRoute = ({ element: Component }) => {
   return !authState.user ? Component : <Navigate to="/jobHome" />;
 };
 UnProtectedRoute.propTypes = {
-  element: propTypes.element
+  element: propTypes.element,
 };
 
 export default UnProtectedRoute;

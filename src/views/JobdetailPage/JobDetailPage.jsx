@@ -1,16 +1,55 @@
-import { FaArrowCircleRight, FaArrowLeft, FaShoppingBag, } from "react-icons/fa";
+import { FaArrowCircleRight, FaArrowLeft, FaShoppingBag } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-
-import whiteMastery from "../../assets/whiteMastery.jpeg";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-import { Button,} from "@nextui-org/button";
-import { useState } from "react";
-
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "@nextui-org/modal";
+import { Button } from "@nextui-org/button";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobDetails } from "../../redux/slices/jobHomeSlice";
+import { toast } from "sonner";
+import Skills from "./components/Skills";
+import Markdown from "react-markdown";
 
 const JobDetailPage = () => {
   const [isDeleteOpen, onDeleteOpenChange] = useState(false);
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const accessToken = useSelector((state) => state.auth.user.token.access);
+  const jobState = useSelector((state) => state.jobHome);
+  useEffect(() => {
+    console.log(id);
+    const fetchJobDetail = async () => {
+      try {
+        await dispatch(
+          getJobDetails({
+            id: id,
+            token: accessToken,
+          })
+        ).unwrap();
+      } catch (error) {
+        toast.error("Unable to get Job Details");
+      }
+    };
+    fetchJobDetail();
+  }, [dispatch, accessToken, id]);
+
+  if (jobState.status === "failure") {
+    toast.error("Unable to get Job Details");
+    return <p className="text-white">Error</p>;
+  }
+  if (jobState.status === "loading") {
+    return <p className="text-white">Loading</p>;
+  }
+  if (jobState.selectedJob === null) {
+    return <p className="text-white">No job found</p>;
+  }
   return (
     <div className="flex-grow min-h-full bg-slate-900 flex flex-col font-serif p-3 mb-4">
       <div className="flex   items-center">
@@ -30,9 +69,7 @@ const JobDetailPage = () => {
           />
         </div>
         <Modal isOpen={isDeleteOpen} onOpenChange={onDeleteOpenChange}>
-          <ModalContent
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 "
-          >
+          <ModalContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 ">
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
@@ -40,7 +77,7 @@ const JobDetailPage = () => {
                 </ModalHeader>
                 <ModalBody>
                   <p className="text-md">
-                   Are you sure you want to delete this post?
+                    Are you sure you want to delete this post?
                   </p>
                 </ModalBody>
                 <ModalFooter>
@@ -59,83 +96,52 @@ const JobDetailPage = () => {
 
       <div className="flex gap-3  mb-2 ">
         <img
-          src={whiteMastery}
+          src={jobState.selectedJob?.image}
           alt="logo"
           className="h-24 w-24 border-none rounded-md "
         />
         <div className="flex flex-col mb-3 ">
-          <p className="text-xl   text-white ">MERN Full Stack developer</p>
+          <p className="text-xl   text-white ">{jobState.selectedJob?.title}</p>
           <p className="text-sm  text-slate-500 mb-2 ">
-            White Mastery - Chennai,Tamil Nadu,India
+            {jobState.selectedJob?.companyName} - {jobState.selectedJob?.place}
           </p>
           <div className="flex gap-2  border rounded-lg bg-slate-800 p-2  w-fit">
             <FaShoppingBag className="text-white text-sm " />
-            <p className="text-sm    text-white">Temporary - Onsite</p>
+            <p className="text-sm    text-white">
+              {jobState.selectedJob?.jobType} -{" "}
+              {jobState.selectedJob?.jobLocationType}
+            </p>
           </div>
         </div>
       </div>
       <hr className="border-slate-500 mb-3" />
-      <h1 className="text-xl font-bold  text-white mb-2 ">Skills Required</h1>
+      <h1 className="text-md font-bold  text-white mb-2 ">Skills Required:</h1>
       <div className="flex flex-wrap gap-2 mb-3">
-        
-        {dummySkills.map((skill) => {
-          return (
-            <div
-              key={skill}
-              className="flex items-center border rounded-2xl bg-slate-800 p-1  w-fit"
-            >
-              <p className="text-md text-white ">{skill}</p>
-            </div>
-          );
+        {jobState.selectedJob.skills.map((skill) => {
+          return <Skills key={skill.id} skills={skill} />;
         })}
       </div>
 
-      <h1 className="text-xl font-bold  text-white mb-1 ">
-        MERN Full Stack Developer
-      </h1>
-      <p className="text-md  text-white mb-2 ">About the Role</p>
-      <p className="text-sm  text-white mb-2 ">
-        We are seeking a skilled and experienced Full Stack MERN Developer to
-        join our team. As a Full Stack Developer at our company, you will play a
-        critical role in the design, development, and maintenance of our web
-        applications. You will work closely with product managers, designers,
-        and other stakeholders to understand project requirements and provide
-        technical insights and solutions. ### Immediate Joiners Preferred. ###
-        Responsibilities - Design and develop user interfaces using React.js -
-        Complete understanding and working experience in backend concepts like
-        Node.js and MongoDB database. - Integrate frontend components with
-        backend systems and APIs. - Debug and resolve frontend-related issues. -
-        Optimize web application performance. - Stay updated with the latest
-        trends and advancements in frontend development. - Contribute to the
-        planning and estimation of development tasks. - Communicate effectively
-        with team members and project stakeholders. ### Requirements - Bachelor
-        degree in Computer Science, Engineering, or a related field. - Minimum
-        of 3 years of experience as a Full Stack Developer in MERN. - Strong
-        proficiency in HTML, CSS, and JavaScript. - In-depth knowledge of
-        React.js and its core principles. - Experience with Redux and other
-        state management libraries. - In-depth working experience with Node.js
-        and MongoDB. - Familiarity with frontend build tools and package
-        managers (e.g., Webpack, npm). - Knowledge of frontend testing
-        frameworks and methodologies. ### Additional Information We offer a
-        competitive salary and benefits package, including health insurance,
-        dental insurance, vision insurance, paid time off, and a 401(k) plan. If
-        you are a skilled and experienced Full Stack MERN Developer who is
-        passionate about building innovative web applications, we encourage you
-        to apply. We are excited to hear from you! To apply, please visit our
-        website at [website address].
+      {/* <h1 className="text-xl font-bold  text-white mb-1 ">Job Description:</h1> */}
+      <p className="text-lg  text-white mb-2 ">{jobState.selectedJob?.title}</p>
+      <p className="text-md  text-white ">About the job:</p>
+      <p className="text-sm  text-slate-300e mb-3 ">
+        <Markdown>{jobState.selectedJob?.description}</Markdown>
       </p>
       <Button className="bg-blue-950">
-        <FaArrowCircleRight  className="text-white text-lg font-serif font-bold" /> Apply Now
+        <FaArrowCircleRight className="text-white text-lg font-serif font-bold" />{" "}
+        Apply Now
       </Button>
     </div>
   );
-}
-const dummySkills =[
-  "HTML",
-  "CSS",
-  "Javascript",
-  "React",
-  "Node",
-  "MongoDB"]
+};
 
-export default JobDetailPage
+// const dummySkills =[
+//   "HTML",
+//   "CSS",
+//   "Javascript",
+//   "React",
+//   "Node",
+//   "MongoDB"]
+
+export default JobDetailPage;

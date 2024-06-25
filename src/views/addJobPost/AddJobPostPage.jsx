@@ -12,52 +12,49 @@ import { useEffect, useState } from "react";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const AddJobPostPage = () => {
-  const [isOpen, setIsOpen] = useState(false)
- const [isOpen2, setIsOpen2] = useState(false);
-const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const navigate = useNavigate();
   const handleToggle = () => {
     setIsOpen(!isOpen);
-  }
+  };
   const handleToggle2 = () => {
     setIsOpen2(!isOpen2);
-  }
+  };
 
+  const schema = yup
+    .object({
+      title: yup.string().required(),
+      place: yup.string().required(),
+      companyName: yup.string().required(),
+      description: yup.string().required(),
+      jobType: yup.string().required(),
+      jobLocationType: yup.string().required(),
+      image: yup.string().required(),
+      url: yup.string().required(),
+      skills: yup.string().required(),
+    })
+    .required();
 
-const schema = yup
-  .object({
-    title: yup.string().required(),
-    place: yup.string().required(),
-    companyName: yup.string().required(),
-    description: yup.string().required(),
-    jobType: yup.string().required(),
-    jobLocationType: yup.string().required(),
-    image: yup.string().required(),
-    url: yup.string().required(),
-    skills : yup.string().required(),
-  })
-  .required();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-   const {
-     register,
-     handleSubmit,
-     formState: { errors },
-   } = useForm({
-     resolver: yupResolver(schema),
-   });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
-  const onSubmit =(data) => {
-    console.log(data)
-  }
- 
   useEffect(() => {
     console.log(errors);
-  },[errors])
-
+  }, [errors]);
 
   return (
     <div className="flex-grow min-h-full bg-slate-900 flex flex-col font-serif p-3 mb-3">
@@ -175,7 +172,6 @@ const schema = yup
               </Dropdown>
             }
           />
-         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             choose Job Location Type
@@ -216,7 +212,6 @@ const schema = yup
               </Dropdown>
             }
           />
-         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Select Your Skills
@@ -233,7 +228,6 @@ const schema = yup
             isInvalid={errors.skills ? true : false}
             errorMessage={errors.skills?.message}
           />
-        
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Job Description

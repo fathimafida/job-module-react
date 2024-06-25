@@ -1,6 +1,12 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, ScrollShadow } from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  ScrollShadow,
+} from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaImage } from "react-icons/fa";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
@@ -10,7 +16,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const EditJobPost = () => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   // const [isOpen3, setIsOpen3] = useState(false);
@@ -26,42 +31,41 @@ const EditJobPost = () => {
   //   setIsOpen3(!isOpen3);
   // };
 
-    const schema = yup
-      .object({
-        title: yup.string().required(),
-        place: yup.string().required(),
-        companyName: yup.string().required(),
-        description: yup.string().required(),
-        jobType: yup.string().required(),
-        jobLocationType: yup.string().required(),
-        image: yup.string().required(),
-        url: yup.string().required(),
-        skills: yup.string().required(),
-      })
-      .required();
+  const schema = yup
+    .object({
+      title: yup.string().required(),
+      place: yup.string().required(),
+      companyName: yup.string().required(),
+      description: yup.string().required(),
+      jobType: yup.string().required(),
+      jobLocationType: yup.string().required(),
+      image: yup.string().required(),
+      url: yup.string().required(),
+      skills: yup.string().required(),
+    })
+    .required();
 
-   const {
-     register,
-     handleSubmit,
-     formState: { errors },
-   } = useForm({
-     resolver: yupResolver(schema),
-   });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit =(data) => {
-    console.log(data)
-  }
- 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   useEffect(() => {
     console.log(errors);
-  },[errors])
-
+  }, [errors]);
 
   return (
     <div className="flex-grow min-h-full bg-slate-900 flex flex-col font-serif p-3 mb-3">
       <ScrollShadow size={100} className="w-full h-full ">
         <div className="flex gap-2  items-center">
-          <FaArrowLeft color="white" onClick={() => navigate("/detailPage")} />
+          <FaArrowLeft color="white" onClick={() => navigate("/jobHome")} />
           <p className="text-xl font-bold  text-white p-3 ">Edit Post</p>
         </div>
         <div className="flex flex-col  justify-center items-center  ">
@@ -130,7 +134,7 @@ const EditJobPost = () => {
             isInvalid={errors.place ? true : false}
             errorMessage={errors.place?.message}
           />
-       
+
           {/*  */}
           <label className="text-white text-xl font-bold mb-2 block ">
             Choose Job Type
@@ -218,7 +222,6 @@ const EditJobPost = () => {
               </Dropdown>
             }
           />
-         
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Select Your Skills
@@ -246,7 +249,6 @@ const EditJobPost = () => {
 
             // }
           />
-        
 
           <label className="text-white text-xl font-bold mb-2 block ">
             Job Description
@@ -293,6 +295,6 @@ const EditJobPost = () => {
       </ScrollShadow>
     </div>
   );
-}
+};
 
-export default EditJobPost
+export default EditJobPost;
