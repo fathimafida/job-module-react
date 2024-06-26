@@ -4,12 +4,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
  import propTypes  from 'prop-types'
+import { Shimmer } from "react-shimmer";
 
 const Featured_Job_Card = ({ jobPost }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="flex  flex-col  border bg-zinc-900/50  border-gray-700 rounded-2xl p-3 mb-3   "
+      className="flex  flex-col  border bg-zinc-900/50  border-gray-700 rounded-2xl p-3 mb-3"
+      
       onClick={() => navigate(`/job/${jobPost.id}`)}
     >
       <div className="flex gap-2 items-center mb-2 ">
@@ -47,7 +49,7 @@ const Featured_Job_Card = ({ jobPost }) => {
   );
 };
 
-Featured_Job_Card.propTypes = {
-  jobPost: propTypes.object(),
-}
+// Featured_Job_Card.propTypes = {
+//   jobPost: propTypes.object(),
+// }
 export default Featured_Job_Card;

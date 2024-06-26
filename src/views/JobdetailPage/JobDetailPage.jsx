@@ -127,7 +127,7 @@ const JobDetailPage = () => {
       <p className="text-md  text-white ">About the job:</p>
       <p className="text-sm  text-slate-300e mb-3 ">
         <Markdown>{jobState.selectedJob?.description}</Markdown>
-      </p>
+      </p> 
       <Button className="bg-blue-950">
         <FaArrowCircleRight className="text-white text-lg font-serif font-bold" />{" "}
         Apply Now
